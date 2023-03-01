@@ -1,0 +1,93 @@
+@import "@styles/style";
+
+.label_and_products_length {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    width: 356px;
+    height: 57px;
+    margin-left: 100px;
+    margin-bottom: 50px;
+
+    & .label {
+        font-family: Arial, Helvetica, sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 44px;
+        line-height: 57px;
+        color: $secondary-color;
+    }
+
+    & .products_length {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 30px;
+        background: #F9F9F9;
+        border-radius: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 21px;
+        color: $primary-color;
+    }
+}
+
+.products_list {
+    display: flex;
+    gap: 29px;
+    margin-left: 100px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 800px) {
+    .label_and_products_length {
+        display: flex;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        gap: 10px;
+        width: 176px;
+        height: 26px;
+        margin-left: 24px;
+        // margin-bottom: 10px;
+
+        & .label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 23px;
+            color: $secondary-color;
+        }
+
+        & .products_length {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 41px;
+            height: 26px;
+            background: #F9F9F9;
+            border-radius: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 21px;
+            color: $primary-color;
+        }
+    }
+
+    .products_list {
+        display: flex;
+        gap: 10px;
+        margin-left: 10px;
+        flex-wrap: wrap;
+    }
+}

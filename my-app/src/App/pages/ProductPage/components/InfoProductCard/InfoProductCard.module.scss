@@ -1,0 +1,126 @@
+@import "@styles/style";
+
+.card {
+    display: flex;
+    justify-content: center;
+    width: 1240px;
+    height: 600px;
+    margin: 100px;
+    padding: 50px 0;
+
+    & img {
+        width: 600px;
+        height: 600px;
+    }
+
+    & .info_about_card {
+        margin-top: 32px;
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+
+        & .title {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 44px;
+            line-height: 130%;
+            color: $secondary-color;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        & .subtitle {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 180%;
+            color: #AFADB5;
+            text-align: left;
+            margin-bottom: 128px;
+        }
+
+        & .price {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 44px;
+            line-height: 130%;
+            color: $secondary-color;
+            text-align: left;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 800px) {
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 90vw;
+        height: 600px;
+        margin: 30px 20px;
+        margin-right: 10px;
+
+        & img {
+            width: 327px;
+            height: 327px;
+        }
+
+        & .info_about_card {
+            margin-top: 12px;
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+
+            & .title {
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 31px;
+                color: $secondary-color;
+                text-align: left;
+                margin-bottom: 10px;
+            }
+
+            & .subtitle {
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 25px;
+                color: #AFADB5;
+                text-align: left;
+                margin-bottom: 60px;
+            }
+
+            & .price {
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 31px;
+                color: $secondary-color;
+                text-align: left;
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+}

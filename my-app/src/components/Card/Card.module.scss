@@ -1,4 +1,4 @@
-@import "@styles/style";
+@import "@styles/variables.scss";
 
 .card {
     display: flex;
@@ -6,7 +6,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    /* justify-content: flex-start; */
     gap: 26px;
     width: 394px;
     height: 600px;
@@ -44,12 +43,10 @@
         flex-grow: 0;
 
         & .category {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
+            @include font_info(700);
             font-size: 18px;
             line-height: 23px;
-            color: #AFADB5;
+            color: $grey-color;
         }
 
         & .text_card_content {
@@ -65,9 +62,7 @@
             flex-grow: 0;
 
             & .content {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 700;
+                @include font_info(700);
                 font-size: 24px;
                 line-height: 31px;
                 color: $secondary-color;
@@ -91,9 +86,7 @@
     & .title {
         width: 346px;
         height: 34px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-style: normal;
-        font-weight: 700;
+        @include font_info(700);
         font-size: 26px;
         line-height: 34px;
         letter-spacing: 0.01em;
@@ -106,10 +99,8 @@
     & .subtitle {
         width: 346px;
         height: 60px;
-        color: #AFADB5;
-        font-family: Arial, Helvetica, sans-serif;
-        font-style: normal;
-        font-weight: 500;
+        color: $grey-color;
+        @include font_info(500);
         font-size: 18px;
         line-height: 32px;
         flex: none;
@@ -125,7 +116,6 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        /* justify-content: flex-start; */
         gap: 15px;
         width: 160px;
         height: 320px;
@@ -164,12 +154,10 @@
             flex-grow: 0;
 
             & .category {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 700;
+                @include font_info(700);
                 font-size: 12px;
                 line-height: 22px;
-                color: #AFADB5;
+                color: $grey-color;
             }
 
             & .text_card_content {
@@ -185,9 +173,7 @@
                 flex-grow: 0;
 
                 & .content {
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-style: normal;
-                    font-weight: 700;
+                    @include font_info(700);
                     font-size: 14px;
                     line-height: 18px;
                     color: $secondary-color;
@@ -211,9 +197,7 @@
         & .title {
             width: 156px;
             height: 34px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
+            @include font_info(700);
             font-size: 14px;
             line-height: 18px;
             letter-spacing: 0.01em;
@@ -226,10 +210,8 @@
         & .subtitle {
             width: 156px;
             height: 60px;
-            color: #AFADB5;
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+            color: $grey-color;
+            @include font_info(500);
             font-size: 12px;
             line-height: 22px;
             flex: none;

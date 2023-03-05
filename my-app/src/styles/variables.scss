@@ -1,0 +1,15 @@
+$primary-color: #518581;
+$secondary-color: #151411;
+$white-color: #FFFFFF;
+$grey-color: #AFADB5;
+
+@mixin square($size) {
+    width: $size;
+    height: $size;
+}
+
+@mixin font_info($weight: 500) {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: $weight;
+}

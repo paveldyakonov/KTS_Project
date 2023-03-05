@@ -11,11 +11,11 @@ const Carousel: React.FC<CarouselProps> = ({ carouselItems, ...props }) => {
   let scrollInterval: NodeJS.Timeout | any = null;
 
   useEffect(() => {
-    scrollInterval = setTimeout(() => {
+    scrollInterval = setInterval(() => {
       setActive((active + 1) % carouselItems.length);
     }, 3000);
 
-    return () => clearTimeout(scrollInterval);
+    return () => clearInterval(scrollInterval);
   });
 
   return (
@@ -25,11 +25,11 @@ const Carousel: React.FC<CarouselProps> = ({ carouselItems, ...props }) => {
         return React.cloneElement(item, {
           ...props,
           className: `carousel-item${activeClass}`,
-          key: `carousel-item${index}`,
+          key: `carousel-item${item.key}`,
         });
       })}
     </div>
   );
 };
 
-export default Carousel;
+export default React.memo(Carousel);

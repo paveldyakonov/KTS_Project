@@ -1,6 +1,6 @@
-@import "@styles/style";
+@import "@styles/variables.scss";
 
-.info_about_page {
+.info-about-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,12 +8,10 @@
     margin-top: 100px;
     margin-bottom: 5vw;
 
-    & .mini_header {
+    &__mini-header {
         width: 20vw;
         height: 6vw;
-        font-family: Arial, Helvetica, sans-serif;
-        font-style: normal;
-        font-weight: 700;
+        @include font_info(700);
         font-size: 4vw;
         line-height: 6vw;
         text-align: center;
@@ -21,22 +19,20 @@
         margin-bottom: 2vw;
     }
 
-    & .description_of_info {
+    &__description-of-info {
         width: 42vw;
         height: 5vw;
-        font-family: Arial, Helvetica, sans-serif;
-        font-style: normal;
-        font-weight: 500;
+        @include font_info(500);
         font-size: 18px;
         line-height: 180%;
         text-align: center;
-        color: #AFADB5;
+        color: $grey-color;
         margin-bottom: 5.5vw;
     }
 }
 
 @media (max-width: 800px) {
-    .info_about_page {
+    .info-about-page {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -44,12 +40,10 @@
         margin-top: 100px;
         margin-bottom: 5vw;
 
-        & .mini_header {
+        &__mini-header {
             width: 119px;
             height: 34px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
+            @include font_info(700);
             font-size: 26px;
             line-height: 34px;
             text-align: center;
@@ -57,16 +51,14 @@
             margin-bottom: 2vw;
         }
 
-        & .description_of_info {
+        &__description-of-info {
             width: 327px;
             height: 75px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+            @include font_info(500);
             font-size: 18px;
             line-height: 180%;
             text-align: center;
-            color: #AFADB5;
+            color: $grey-color;
             margin-bottom: 20px;
         }
     }

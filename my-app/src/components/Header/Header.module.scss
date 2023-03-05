@@ -1,18 +1,16 @@
-@import "@styles/style";
+@import "@styles/variables.scss";
 
 .header {
     display: flex;
-    // justify-content: space-evenly;
     align-items: center;
     border-bottom: 2px solid #F3F3F3;
     height: 120px;
-    width: 100vw;
+    width: 98vw;
     box-sizing: border-box;
+    overflow: hidden;
 
     & div {
-        font-family: Arial, Helvetica, sans-serif;
-        font-style: normal;
-        font-weight: 700;
+        @include font_info(700);
         font-size: 18px;
         line-height: 32px;
         color: $secondary-color;
@@ -37,18 +35,14 @@
         margin: 3vw 24vw 44px 0px;
 
         & div {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+            @include font_info(500);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
         }
 
         :first-child {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+            @include font_info(500);
             font-size: 18px;
             line-height: 32px;
             color: $primary-color;
@@ -73,7 +67,6 @@
 @media (max-width: 800px) {
     .header {
         display: flex;
-        // justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
         border-bottom: 2px solid #F3F3F3;
@@ -82,9 +75,7 @@
         box-sizing: border-box;
 
         & div {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
+            @include font_info(700);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
@@ -110,18 +101,14 @@
             margin: 3vw 0px 44px 0px;
 
             & div {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 500;
+                @include font_info(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $secondary-color;
             }
 
             :first-child {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 500;
+                @include font_info(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $primary-color;

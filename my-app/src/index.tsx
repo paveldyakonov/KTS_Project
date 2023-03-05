@@ -1,8 +1,12 @@
 import React from "react";
 
+import "./config/configureMobX";
+// eslint-disable-next-line import/order
 import ReactDOM from "react-dom/client";
 
 import "./index.scss";
+
+import * as Router from "react-router-dom";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -12,7 +16,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Router.BrowserRouter>
+      <App />
+    </Router.BrowserRouter>
   </React.StrictMode>
 );
 

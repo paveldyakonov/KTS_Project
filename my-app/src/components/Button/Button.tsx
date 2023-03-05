@@ -2,16 +2,22 @@ import React from "react";
 
 import styles from "./Button.module.scss";
 
+export enum ButtonSize {
+  b = "big",
+  s = "small",
+}
+
 export type ButtonProps = React.PropsWithChildren<{
   children?: React.ReactNode;
   size?: string;
   color?: string;
+  onClick?: () => void;
 }> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = ({ ...props }): any => {
   let classBtn: string = styles.button;
-  if (props.size === "big") {
+  if (props.size === ButtonSize.b) {
     classBtn = styles.big_button;
   }
   if (props.color === "white") {
@@ -25,4 +31,4 @@ export const Button: React.FC<ButtonProps> = ({ ...props }): any => {
   );
 };
 
-export default Button;
+export default React.memo(Button);

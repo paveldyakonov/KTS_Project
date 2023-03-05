@@ -6,7 +6,7 @@ import user from "@images/user.svg";
 
 import styles from "./Header.module.scss";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo_and_name}>
@@ -26,4 +26,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

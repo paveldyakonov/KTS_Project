@@ -1,50 +1,43 @@
-@import "@styles/style";
+@import "@styles/variables.scss";
 
 .card {
     display: flex;
     justify-content: center;
-    width: 1240px;
-    height: 600px;
-    margin: 100px;
+    width: 86vw;
+    height: 500px;
+    margin: 80px 0 80px 80px;
     padding: 50px 0;
 
     & img {
-        width: 600px;
-        height: 600px;
+        @include square(500px);
     }
 
-    & .info_about_card {
+    &__info-about-card {
         margin-top: 32px;
-        margin-left: 50px;
+        margin-left: 30px;
         display: flex;
         flex-direction: column;
 
-        & .title {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 44px;
+        &__title {
+            @include font_info(700);
+            font-size: 3vw;
             line-height: 130%;
             color: $secondary-color;
             text-align: left;
             margin-bottom: 20px;
         }
 
-        & .subtitle {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+        &__subtitle {
+            @include font_info(500);
             font-size: 18px;
             line-height: 180%;
-            color: #AFADB5;
+            color: $grey-color;
             text-align: left;
             margin-bottom: 128px;
         }
 
-        & .price {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
+        &__price {
+            @include font_info(700);
             font-size: 44px;
             line-height: 130%;
             color: $secondary-color;
@@ -71,20 +64,17 @@
         margin-right: 10px;
 
         & img {
-            width: 327px;
-            height: 327px;
+            @include square(327px);
         }
 
-        & .info_about_card {
+        &__info-about-card {
             margin-top: 12px;
             margin-left: 20px;
             display: flex;
             flex-direction: column;
 
-            & .title {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 700;
+            &__title {
+                @include font_info(700);
                 font-size: 24px;
                 line-height: 31px;
                 color: $secondary-color;
@@ -92,21 +82,17 @@
                 margin-bottom: 10px;
             }
 
-            & .subtitle {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 500;
+            &__subtitle {
+                @include font_info(500);
                 font-size: 14px;
                 line-height: 25px;
-                color: #AFADB5;
+                color: $grey-color;
                 text-align: left;
                 margin-bottom: 60px;
             }
 
-            & .price {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 700;
+            &__price {
+                @include font_info(700);
                 font-size: 24px;
                 line-height: 31px;
                 color: $secondary-color;

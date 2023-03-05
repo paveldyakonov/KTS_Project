@@ -16,6 +16,9 @@
       ],
       "@images/*": [
         "src/images/*"
+      ],
+      "@store/*": [
+        "src/store/*"
       ]
     }
   }

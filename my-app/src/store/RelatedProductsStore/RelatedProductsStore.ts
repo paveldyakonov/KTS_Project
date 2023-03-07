@@ -4,6 +4,7 @@ import {
   getInitialCollectionModel,
   linearizeCollection,
 } from "@store/models/shared/collection";
+import { Meta } from "@utils/meta";
 import { ILocalStore } from "@utils/useLocalStore";
 import axios from "axios";
 import {
@@ -20,7 +21,7 @@ import {
   ProductItemModel,
 } from "./../models/ProductsList/productItem";
 
-type PrivateFields = "_cardsList";
+type PrivateFields = "_cardsList" | "_meta";
 
 export default class RelatedProductsStore implements ILocalStore {
   private _cardsList: CollectionModel<number, ProductItemModel> =
@@ -28,12 +29,15 @@ export default class RelatedProductsStore implements ILocalStore {
 
   private _offset: number = 0;
   private _categoryId: number | string = 0;
+  private _meta: Meta = Meta.initial;
 
   constructor(categoryId: number | string) {
     this._categoryId = categoryId;
     makeObservable<RelatedProductsStore, PrivateFields>(this, {
       _cardsList: observable.ref,
+      _meta: observable,
       cardsList: computed,
+      meta: computed,
       getProductsList: action.bound,
       destroy: action.bound,
     });
@@ -43,11 +47,16 @@ export default class RelatedProductsStore implements ILocalStore {
     return linearizeCollection(this._cardsList);
   }
 
+  get meta(): Meta {
+    return this._meta;
+  }
+
   async getProductsList(
     mode: string = "",
     categoryId: number | string
   ): Promise<void> {
     this._cardsList = getInitialCollectionModel();
+    this._meta = Meta.loading;
 
     const result = await axios<ProductItemApi[]>({
       method: "get",
@@ -60,6 +69,7 @@ export default class RelatedProductsStore implements ILocalStore {
 
     runInAction(() => {
       try {
+        this._meta = Meta.success;
         const list = JSON.parse(JSON.stringify(this._cardsList));
 
         for (const item of result.data) {
@@ -72,12 +82,10 @@ export default class RelatedProductsStore implements ILocalStore {
         this._cardsList = list;
       } catch (error) {
         this._cardsList = getInitialCollectionModel();
+        this._meta = Meta.error;
       }
     });
   }
 
-  destroy(): void {
-    this._cardsList = getInitialCollectionModel();
-    this._offset = 0;
-  }
+  destroy(): void {}
 }

@@ -10,6 +10,7 @@ import {
   linearizeCollection,
 } from "@store/models/shared/collection";
 import rootStore from "@store/RootStore";
+import { Meta } from "@utils/meta";
 import { ILocalStore } from "@utils/useLocalStore";
 import axios from "axios";
 import {
@@ -22,7 +23,7 @@ import {
   runInAction,
 } from "mobx";
 
-type PrivateFields = "_cardsList" | "_cardTitle" | "_categoryId";
+type PrivateFields = "_cardsList" | "_cardTitle" | "_categoryId" | "_meta";
 
 export default class ProductsListStore implements ILocalStore {
   private _cardsList: CollectionModel<number, ProductItemModel> =
@@ -37,6 +38,7 @@ export default class ProductsListStore implements ILocalStore {
     : "";
 
   private _offset: number = 0;
+  private _meta: Meta = Meta.initial;
   hasMore: boolean = true;
 
   constructor() {
@@ -44,12 +46,13 @@ export default class ProductsListStore implements ILocalStore {
       _cardsList: observable,
       _cardTitle: observable,
       _categoryId: observable,
+      _meta: observable,
       hasMore: observable,
       cardsList: computed,
+      meta: computed,
       setHasMore: action.bound,
       getProductsList: action.bound,
       getProductsListMore: action.bound,
-      destroy: action.bound,
     });
   }
 
@@ -60,6 +63,10 @@ export default class ProductsListStore implements ILocalStore {
 
   get cardsList(): ProductItemModel[] {
     return linearizeCollection(this._cardsList);
+  }
+
+  get meta(): Meta {
+    return this._meta;
   }
 
   setHasMore(): void {
@@ -75,6 +82,8 @@ export default class ProductsListStore implements ILocalStore {
       this._offset += 12;
     }
 
+    this._meta = Meta.loading;
+
     const result = await axios<ProductItemApi[]>({
       method: "get",
       url: API_ENDPOINT.PRODUCTS,
@@ -87,6 +96,7 @@ export default class ProductsListStore implements ILocalStore {
     });
 
     runInAction(() => {
+      this._meta = Meta.success;
       if (result.data.length === 0) {
         this.setHasMore();
         return;
@@ -96,15 +106,16 @@ export default class ProductsListStore implements ILocalStore {
         const list = JSON.parse(JSON.stringify(this._cardsList));
 
         for (const item of result.data) {
-          if (item && !this._cardsList.order.includes(item.id)) {
+          if (item && !list.order.includes(item.id)) {
             list.order.push(item.id);
+            list.entities[item.id] = normalizeProductItem(item);
           }
-          if (item) list.entities[item.id] = normalizeProductItem(item);
         }
 
         this._cardsList = list;
       } catch (error) {
         this._cardsList = getInitialCollectionModel();
+        this._meta = Meta.error;
       }
     });
   }
@@ -114,8 +125,8 @@ export default class ProductsListStore implements ILocalStore {
   }
 
   destroy(): void {
-    this._cardsList = getInitialCollectionModel();
-    this._offset = 0;
+    //this._qqReaction();
+    //this._qqReactionCategoryId();
   }
 
   private readonly _qqReaction: IReactionDisposer = reaction(

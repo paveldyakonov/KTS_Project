@@ -1,12 +1,20 @@
+export type categoryProduct = {
+  id: string;
+  name: string;
+  image: string;
+  creationAt: string;
+  updatedAt: string;
+};
+
 export type ProductItemApi = {
   id: number;
   title: string;
   price: string | number;
   description: string;
-  images: any;
+  images: string[];
   creationAt: string;
   updatedAt: string;
-  category: any;
+  category: categoryProduct;
 };
 
 export type ProductItemModel = {
@@ -14,7 +22,7 @@ export type ProductItemModel = {
   title: string;
   price: string | number;
   description: string;
-  image: any;
+  image: string;
   category: string;
 };
 

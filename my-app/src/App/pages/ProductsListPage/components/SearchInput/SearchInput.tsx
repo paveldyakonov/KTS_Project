@@ -18,8 +18,10 @@ const SearchInput: React.FC = () => {
     let category: any = "";
     if (searchParams.has("categoryId")) {
       category = searchParams.get("categoryId");
+      setSearchParams({ search: inputStore.text, categoryId: category });
+    } else {
+      setSearchParams({ search: inputStore.text });
     }
-    setSearchParams({ search: inputStore.text, categoryId: category });
   };
 
   return (
@@ -38,10 +40,13 @@ const SearchInput: React.FC = () => {
         <MultiDropdown
           value={inputStore.categoryId}
           onChange={(res: any) => {
-            setSearchParams({
-              search: inputStore.text,
-              categoryId: res.key[0],
-            });
+            let search: any = "";
+            if (searchParams.has("search")) {
+              search = searchParams.get("search");
+              setSearchParams({ search: search, categoryId: res.key[0] });
+            } else {
+              setSearchParams({ categoryId: res.key[0] });
+            }
           }}
         />
       </div>
@@ -49,4 +54,4 @@ const SearchInput: React.FC = () => {
   );
 };
 
-export default React.memo(observer(SearchInput));
+export default observer(SearchInput);

@@ -3,7 +3,9 @@ import React, { useEffect } from "react";
 import Button from "@components/Button";
 import { ButtonSize } from "@components/Button/Button";
 import Carousel from "@components/Carousel";
+import Loader, { LoaderSize } from "@components/Loader/Loader";
 import ProductPageStore from "@store/ProductPageStore";
+import { Meta } from "@utils/meta";
 import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
@@ -21,41 +23,41 @@ const InfoProductCard: React.FC = () => {
   }, [id, product]);
 
   let items = [];
-  if (product.card.image1) {
-    items.push(<img key="img1" src={product.card.image1} alt="" />);
-  }
-  if (product.card.image2) {
-    items.push(<img key="img2" src={product.card.image2} alt="" />);
-  }
-  if (product.card.image3) {
-    items.push(<img key="img3" src={product.card.image3} alt="" />);
-  }
+  items = product.card.images.map((img) => <img key={img} src={img} alt="" />);
 
   return (
     <div>
       <div id={product.card.id} className={styles.card}>
-        <Carousel carouselItems={items} />
-        <div className={styles["card__info-about-card"]}>
-          <div className={styles["card__info-about-card__title"]}>
-            {product.card.title}
+        {product.meta === Meta.loading && (
+          <div className={styles.loader}>
+            <Loader size={LoaderSize.l} />
           </div>
-          <div className={styles["card__info-about-card__subtitle"]}>
-            {product.card.description}
+        )}
+        {product.meta !== Meta.error && <Carousel carouselItems={items} />}
+        {product.meta !== Meta.error && (
+          <div className={styles["card__info-about-card"]}>
+            <div className={styles["info-about-card__title"]}>
+              {product.card.title}
+            </div>
+            <div className={styles["info-about-card__subtitle"]}>
+              {product.card.description}
+            </div>
+            <div className={styles["info-about-card__price"]}>
+              ${product.card.price}
+            </div>
+            <div className={styles.buttons}>
+              <Button size={ButtonSize.b}>Buy Now</Button>
+              <Button size={ButtonSize.b} color="white">
+                Add to Cart
+              </Button>
+            </div>
           </div>
-          <div className={styles["card__info-about-card__price"]}>
-            ${product.card.price}
-          </div>
-          <div className={styles.buttons}>
-            <Button size={ButtonSize.b}>Buy Now</Button>
-            <Button size={ButtonSize.b} color="white">
-              Add to Cart
-            </Button>
-          </div>
-        </div>
+        )}
       </div>
+      {product.meta === Meta.error && <div>ERROR</div>}
       <RelatedProducts categoryId={product.card.categoryId} />
     </div>
   );
 };
 
-export default React.memo(observer(InfoProductCard));
+export default observer(InfoProductCard);

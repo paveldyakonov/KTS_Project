@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 
 import Card from "@components/Card";
+import Loader from "@components/Loader";
+import { LoaderSize } from "@components/Loader/Loader";
 import RelatedProductsStore from "@store/RelatedProductsStore";
+import { Meta } from "@utils/meta";
 import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
@@ -29,22 +32,30 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ categoryId }) => {
   return (
     <div>
       <div className={styles.title}>Related Items</div>
-      <div className={styles["products-list"]}>
-        {relatedProductsStore.cardsList.map((card: any) => (
-          <Card
-            key={card.id}
-            image={card.image}
-            category={card.category}
-            title={card.title}
-            subtitle={card.description}
-            content={card.price}
-            onClick={clickEventHandler}
-            id={card.id}
-          />
-        ))}
-      </div>
+      {relatedProductsStore.meta === Meta.loading && (
+        <div className={styles.loader}>
+          <Loader size={LoaderSize.l} />
+        </div>
+      )}
+      {relatedProductsStore.meta !== Meta.error && (
+        <div className={styles["products-list"]}>
+          {relatedProductsStore.cardsList.map((card: any) => (
+            <Card
+              key={card.id}
+              image={card.image}
+              category={card.category}
+              title={card.title}
+              subtitle={card.description}
+              content={card.price}
+              onClick={clickEventHandler}
+              id={card.id}
+            />
+          ))}
+        </div>
+      )}
+      {relatedProductsStore.meta === Meta.error && <div>ERROR</div>}
     </div>
   );
 };
 
-export default React.memo(observer(RelatedProducts));
+export default observer(RelatedProducts);

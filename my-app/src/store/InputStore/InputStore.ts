@@ -47,7 +47,10 @@ export default class InputStore implements ILocalStore {
     this._categoryId = text;
   }
 
-  destroy(): void {}
+  destroy(): void {
+    //this._qqReaction();
+    //this._qqReactionCategoryId();
+  }
 
   private readonly _qqReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("search"),

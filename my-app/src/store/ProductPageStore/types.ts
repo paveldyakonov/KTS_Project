@@ -1,32 +1,36 @@
+export type categoryProduct = {
+  id: string;
+  name: string;
+  image: string;
+  creationAt: string;
+  updatedAt: string;
+};
+
 export type ProductItemModel = {
-  image1: string;
-  image2: string;
-  image3: string;
-  id: any;
+  images: string[];
+  id: string;
   title: string;
   price: string;
   description: string;
   category: string;
-  categoryId: any;
+  categoryId: string;
 };
 
 export type ProductItemApi = {
-  id: number;
+  id: string;
   title: string;
   price: string;
   description: string;
   images: any;
   creationAt: string;
   updatedAt: string;
-  category: any;
+  category: categoryProduct;
 };
 
 export const normalizeProductItem = (
   from: ProductItemApi
 ): ProductItemModel => ({
-  image1: from.images[0],
-  image2: from.images[1],
-  image3: from.images[2],
+  images: from.images,
   id: from.id,
   title: from.title,
   price: from.price,

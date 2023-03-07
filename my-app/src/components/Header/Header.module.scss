@@ -1,4 +1,5 @@
 @import "@styles/variables.scss";
+@import "@styles/mixins.scss";
 
 .header {
     display: flex;
@@ -10,7 +11,7 @@
     overflow: hidden;
 
     & div {
-        @include font_info(700);
+        @include fontInfo(700);
         font-size: 18px;
         line-height: 32px;
         color: $secondary-color;
@@ -35,14 +36,14 @@
         margin: 3vw 24vw 44px 0px;
 
         & div {
-            @include font_info(500);
+            @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
         }
 
         :first-child {
-            @include font_info(500);
+            @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
             color: $primary-color;
@@ -75,7 +76,7 @@
         box-sizing: border-box;
 
         & div {
-            @include font_info(700);
+            @include fontInfo(700);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
@@ -101,14 +102,14 @@
             margin: 3vw 0px 44px 0px;
 
             & div {
-                @include font_info(500);
+                @include fontInfo(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $secondary-color;
             }
 
             :first-child {
-                @include font_info(500);
+                @include fontInfo(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $primary-color;

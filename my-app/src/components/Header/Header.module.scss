@@ -10,14 +10,11 @@
     box-sizing: border-box;
     overflow: hidden;
 
-    & div {
+    & .logo_and_name {
         @include fontInfo(700);
         font-size: 18px;
         line-height: 32px;
         color: $secondary-color;
-    }
-
-    & .logo_and_name {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -27,6 +24,10 @@
     }
 
     & .navbar {
+        @include fontInfo(700);
+        font-size: 18px;
+        line-height: 32px;
+        color: $secondary-color;
         display: flex;
         align-items: flex-start;
         padding: 0px;
@@ -35,7 +36,7 @@
         width: 26vw;
         margin: 3vw 24vw 44px 0px;
 
-        & div {
+        &__nav {
             @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
@@ -51,6 +52,10 @@
     }
 
     & .trash_and_profile {
+        @include fontInfo(700);
+        font-size: 18px;
+        line-height: 32px;
+        color: $secondary-color;
         display: flex;
         justify-content: space-between;
         gap: 10px;
@@ -75,14 +80,11 @@
         width: 100vw;
         box-sizing: border-box;
 
-        & div {
+        & .logo_and_name {
             @include fontInfo(700);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
-        }
-
-        & .logo_and_name {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -92,6 +94,10 @@
         }
 
         & .navbar {
+            @include fontInfo(700);
+            font-size: 18px;
+            line-height: 32px;
+            color: $secondary-color;
             display: flex;
             align-items: flex-start;
             justify-content: center;
@@ -101,7 +107,7 @@
             width: 26vw;
             margin: 3vw 0px 44px 0px;
 
-            & div {
+            &__nav {
                 @include fontInfo(500);
                 font-size: 18px;
                 line-height: 32px;
@@ -117,6 +123,10 @@
         }
 
         & .trash_and_profile {
+            @include fontInfo(700);
+            font-size: 18px;
+            line-height: 32px;
+            color: $secondary-color;
             display: flex;
             justify-content: space-between;
             gap: 10px;

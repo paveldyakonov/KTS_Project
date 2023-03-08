@@ -8,7 +8,7 @@ import styles from "./App.module.scss";
 import ProductPage from "./pages/ProductPage";
 import ProductsListPage from "./pages/ProductsListPage";
 
-function App() {
+const App = () => {
   useQueryParamsStoreInit();
   return (
     <div className={styles.App}>
@@ -22,6 +22,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

@@ -7,7 +7,7 @@ export type categoryProduct = {
 };
 
 export type ProductItemApi = {
-  id: number;
+  id: string;
   title: string;
   price: string | number;
   description: string;
@@ -18,7 +18,7 @@ export type ProductItemApi = {
 };
 
 export type ProductItemModel = {
-  id: number;
+  id: string;
   title: string;
   price: string | number;
   description: string;

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import Card from "@components/Card";
 import Loader from "@components/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
+import { ProductItemModel } from "@store/models/ProductsList";
 import RelatedProductsStore from "@store/RelatedProductsStore";
 import { Meta } from "@utils/meta";
 import { useLocalStore } from "@utils/useLocalStore";
@@ -17,17 +18,18 @@ export type RelatedProductsProps = {
 
 const RelatedProducts: React.FC<RelatedProductsProps> = ({ categoryId }) => {
   const navigate = useNavigate();
-  const relatedProductsStore = useLocalStore(
-    () => new RelatedProductsStore(categoryId)
-  );
+  const relatedProductsStore = useLocalStore(() => new RelatedProductsStore());
 
   useEffect(() => {
-    if (categoryId) relatedProductsStore.getProductsList("reset", categoryId);
+    if (categoryId) relatedProductsStore.getProductsList(categoryId);
   }, [categoryId, relatedProductsStore]);
 
-  const clickEventHandler = (event: React.MouseEvent) => {
-    navigate(`/product/${event.currentTarget.id}`);
-  };
+  const clickEventHandler = useCallback(
+    (event: React.MouseEvent) => {
+      navigate(`/product/${event.currentTarget.id}`);
+    },
+    [navigate]
+  );
 
   return (
     <div>
@@ -39,7 +41,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ categoryId }) => {
       )}
       {relatedProductsStore.meta !== Meta.error && (
         <div className={styles["products-list"]}>
-          {relatedProductsStore.cardsList.map((card: any) => (
+          {relatedProductsStore.cardsList.map((card: ProductItemModel) => (
             <Card
               key={card.id}
               image={card.image}

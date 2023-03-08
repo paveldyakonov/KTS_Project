@@ -26,15 +26,17 @@ import {
 type PrivateFields = "_cardsList" | "_cardTitle" | "_categoryId" | "_meta";
 
 export default class ProductsListStore implements ILocalStore {
-  private _cardsList: CollectionModel<number, ProductItemModel> =
+  private _cardsList: CollectionModel<string, ProductItemModel> =
     getInitialCollectionModel();
 
-  private _cardTitle: string = rootStore.query.getParam("search")
-    ? (rootStore.query.getParam("search") as string)
+  private _cardTitle: string | undefined = rootStore.query.getParam("search")
+    ? rootStore.query.getParam("search")?.toString()
     : "";
 
-  private _categoryId: string = rootStore.query.getParam("categoryId")
-    ? (rootStore.query.getParam("categoryId") as string)
+  private _categoryId: string | undefined = rootStore.query.getParam(
+    "categoryId"
+  )
+    ? rootStore.query.getParam("categoryId")?.toString()
     : "";
 
   private _offset: number = 0;
@@ -43,7 +45,7 @@ export default class ProductsListStore implements ILocalStore {
 
   constructor() {
     makeObservable<ProductsListStore, PrivateFields>(this, {
-      _cardsList: observable,
+      _cardsList: observable.ref,
       _cardTitle: observable,
       _categoryId: observable,
       _meta: observable,
@@ -52,13 +54,9 @@ export default class ProductsListStore implements ILocalStore {
       meta: computed,
       setHasMore: action.bound,
       getProductsList: action.bound,
+      getProductsListInit: action.bound,
       getProductsListMore: action.bound,
     });
-  }
-
-  setOffset(value: number) {
-    this._offset += value;
-    this.getProductsList();
   }
 
   get cardsList(): ProductItemModel[] {
@@ -75,21 +73,27 @@ export default class ProductsListStore implements ILocalStore {
 
   async getProductsList(mode: string = ""): Promise<void> {
     if (mode === "reset") {
-      this._offset = 0;
-      this._cardsList = getInitialCollectionModel();
-      this.hasMore = true;
-    } else {
-      this._offset += 12;
+      this.getProductsListInit();
     }
 
     this._meta = Meta.loading;
+
+    let newCategoryId: string = "";
+    if (this._categoryId?.toString()) {
+      for (const char of this._categoryId.toString()) {
+        const ch: any = parseInt(char);
+        if (ch || ch === 0) {
+          newCategoryId += ch.toString();
+        }
+      }
+    }
 
     const result = await axios<ProductItemApi[]>({
       method: "get",
       url: API_ENDPOINT.PRODUCTS,
       params: {
         title: this._cardTitle,
-        categoryId: this._categoryId,
+        categoryId: newCategoryId,
         offset: this._offset,
         limit: 12,
       },
@@ -120,19 +124,27 @@ export default class ProductsListStore implements ILocalStore {
     });
   }
 
+  getProductsListInit(): void {
+    this._offset = 0;
+    this._cardsList = getInitialCollectionModel();
+    this.hasMore = true;
+  }
+
   getProductsListMore(): void {
+    this._offset += 12;
     this.getProductsList();
   }
 
   destroy(): void {
-    //this._qqReaction();
-    //this._qqReactionCategoryId();
+    // this._qqReaction();
+    // this._qqReactionCategoryId();
   }
 
   private readonly _qqReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("search"),
     (search) => {
-      this._cardTitle = search as string;
+      search = search?.toString();
+      this._cardTitle = search ? search : "";
       this.getProductsList("reset");
     }
   );
@@ -140,7 +152,8 @@ export default class ProductsListStore implements ILocalStore {
   private readonly _qqReactionCategoryId: IReactionDisposer = reaction(
     () => rootStore.query.getParam("categoryId"),
     (search) => {
-      this._categoryId = search as string;
+      search = search?.toString();
+      this._categoryId = search ? search : "";
       this.getProductsList("reset");
     }
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 
 import Button from "@components/Button";
 import { ButtonSize } from "@components/Button/Button";
@@ -22,8 +22,12 @@ const InfoProductCard: React.FC = () => {
     window.scrollTo(0, 0);
   }, [id, product]);
 
-  let items = [];
-  items = product.card.images.map((img) => <img key={img} src={img} alt="" />);
+  let items = useRef<React.ReactNode[]>([]);
+  useMemo(() => {
+    items.current = product.card.images.map((img) => (
+      <img key={img} src={img} alt="" />
+    ));
+  }, [product.card.images]);
 
   return (
     <div>
@@ -33,7 +37,9 @@ const InfoProductCard: React.FC = () => {
             <Loader size={LoaderSize.l} />
           </div>
         )}
-        {product.meta !== Meta.error && <Carousel carouselItems={items} />}
+        {product.meta !== Meta.error && (
+          <Carousel carouselItems={items.current} />
+        )}
         {product.meta !== Meta.error && (
           <div className={styles["card__info-about-card"]}>
             <div className={styles["info-about-card__title"]}>

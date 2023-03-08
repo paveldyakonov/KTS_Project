@@ -19,15 +19,7 @@ import {
 type PrivateFields = "_card" | "_meta";
 
 export default class ProductPageStore implements ILocalStore {
-  private _card: ProductItemModel = {
-    images: [],
-    id: "",
-    title: "",
-    price: "",
-    description: "",
-    category: "",
-    categoryId: "",
-  };
+  private _card: ProductItemModel | null = null;
 
   private _meta: Meta = Meta.initial;
 
@@ -42,14 +34,23 @@ export default class ProductPageStore implements ILocalStore {
   }
 
   get card(): ProductItemModel {
-    return this._card;
+    if (this._card) return this._card;
+    return {
+      images: [],
+      id: "",
+      title: "",
+      price: "",
+      description: "",
+      category: "",
+      categoryId: "",
+    };
   }
 
   get meta(): Meta {
     return this._meta;
   }
 
-  async getProductInfo(id?: string): Promise<void> {
+  async getProductInfo(id: string = "1"): Promise<void> {
     this._meta = Meta.loading;
 
     const result = await axios<ProductItemApi>({

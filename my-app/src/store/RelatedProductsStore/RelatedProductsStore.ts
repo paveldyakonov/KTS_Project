@@ -24,22 +24,19 @@ import {
 type PrivateFields = "_cardsList" | "_meta";
 
 export default class RelatedProductsStore implements ILocalStore {
-  private _cardsList: CollectionModel<number, ProductItemModel> =
+  private _cardsList: CollectionModel<string, ProductItemModel> =
     getInitialCollectionModel();
 
   private _offset: number = 0;
-  private _categoryId: number | string = 0;
   private _meta: Meta = Meta.initial;
 
-  constructor(categoryId: number | string) {
-    this._categoryId = categoryId;
+  constructor() {
     makeObservable<RelatedProductsStore, PrivateFields>(this, {
       _cardsList: observable.ref,
       _meta: observable,
       cardsList: computed,
       meta: computed,
       getProductsList: action.bound,
-      destroy: action.bound,
     });
   }
 
@@ -51,10 +48,7 @@ export default class RelatedProductsStore implements ILocalStore {
     return this._meta;
   }
 
-  async getProductsList(
-    mode: string = "",
-    categoryId: number | string
-  ): Promise<void> {
+  async getProductsList(categoryId: number | string): Promise<void> {
     this._cardsList = getInitialCollectionModel();
     this._meta = Meta.loading;
 

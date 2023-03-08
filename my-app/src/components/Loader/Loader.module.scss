@@ -1,7 +1,7 @@
 @import "@styles/variables.scss";
 @import "@styles/mixins.scss";
 
-.medium-loader {
+.loader_size-m {
   border: 6px solid $primary-color;
   border-right: 6px solid transparent;
   border-radius: 50%;
@@ -10,7 +10,7 @@
   animation: spin 2s linear infinite;
 }
 
-.small-loader {
+.loader_size-s {
   border: 3px solid $primary-color;
   border-right: 3px solid transparent;
   border-radius: 50%;
@@ -19,7 +19,7 @@
   animation: spin 2s linear infinite;
 }
 
-.large-loader {
+.loader_size-l {
   border: 6px solid $primary-color;
   border-right: 6px solid transparent;
   border-radius: 50%;

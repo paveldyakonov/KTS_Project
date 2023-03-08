@@ -14,9 +14,9 @@ const Header: React.FC = () => {
         <div>Lalasia</div>
       </div>
       <div className={styles.navbar}>
-        <div>Products</div>
-        <div>Categories</div>
-        <div>About Us</div>
+        <div className={styles.navbar__nav}>Products</div>
+        <div className={styles.navbar__nav}>Categories</div>
+        <div className={styles.navbar__nav}>About Us</div>
       </div>
       <div className={styles.trash_and_profile}>
         <img src={trash} alt="trash" className={styles.trash} />

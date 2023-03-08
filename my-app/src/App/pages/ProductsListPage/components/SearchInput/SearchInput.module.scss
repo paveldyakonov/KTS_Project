@@ -14,7 +14,7 @@
         box-sizing: border-box;
         position: relative;
         background-color: $white-color;
-        box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
+        box-shadow: $box-shadow;
 
         & img {
             position: absolute;
@@ -23,7 +23,7 @@
             left: 2vw;
         }
 
-        & input {
+        & .input {
             box-sizing: border-box;
             width: 71vw;
             height: 84px;
@@ -35,6 +35,7 @@
         }
 
         & button {
+            cursor: pointer;
             position: absolute;
             right: 28px;
             top: 15px;
@@ -67,7 +68,7 @@
         width: 190px;
         height: 84px;
         background-color: $white-color;
-        box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
+        box-shadow: $box-shadow;
         border: none;
         @include fontInfo(500);
         font-size: 18px;
@@ -99,7 +100,7 @@
             box-sizing: border-box;
             position: relative;
             background-color: $white-color;
-            box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
+            box-shadow: $box-shadow;
             margin-left: 30px;
 
             & img {
@@ -110,7 +111,7 @@
                 @include square(19px);
             }
 
-            & input {
+            & .input {
                 box-sizing: border-box;
                 width: 327px;
                 height: 55px;
@@ -170,7 +171,7 @@
             width: 327px;
             height: 48px;
             background-color: $white-color;
-            box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
+            box-shadow: $box-shadow;
             border: none;
             @include fontInfo(500);
             font-size: 14px;

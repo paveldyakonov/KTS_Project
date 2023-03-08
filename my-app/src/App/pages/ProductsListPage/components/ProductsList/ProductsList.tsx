@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import Card from "@components/Card";
 import Loader from "@components/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
+import { ProductItemModel } from "@store/models/ProductsList";
 import ProductsListStore from "@store/ProductsListStore";
 import { Meta } from "@utils/meta";
 import { useLocalStore } from "@utils/useLocalStore";
@@ -21,9 +22,12 @@ const ProductsList: React.FC = () => {
     productsListStore.getProductsList("reset");
   }, [productsListStore]);
 
-  const clickEventHandler = (event: React.MouseEvent) => {
-    navigate(`/product/${event.currentTarget.id}`);
-  };
+  const clickEventHandler = useCallback(
+    (event: React.MouseEvent) => {
+      navigate(`/product/${event.currentTarget.id}`);
+    },
+    [navigate]
+  );
 
   return (
     <div>
@@ -50,7 +54,7 @@ const ProductsList: React.FC = () => {
             endMessage={<p>That's all products</p>}
             className={styles["products-list"]}
           >
-            {productsListStore.cardsList.map((card: any) => (
+            {productsListStore.cardsList.map((card: ProductItemModel) => (
               <Card
                 key={card.id}
                 image={card.image}

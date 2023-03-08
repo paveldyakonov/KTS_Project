@@ -17,15 +17,10 @@ export const Loader: React.FC<LoaderProps> = ({
   loading = true,
   size = LoaderSize.m,
 }): any => {
-  let classLoader = styles["medium-loader"];
-  if (size === LoaderSize.s) {
-    classLoader = styles["small-loader"];
-  } else if (size === LoaderSize.l) {
-    classLoader = styles["large-loader"];
-  }
+  const classLoader = styles[`loader_size-${size}`];
 
   if (loading) {
-    return <div className={classLoader}></div>;
+    return <div className={classLoader} />;
   }
   return;
 };

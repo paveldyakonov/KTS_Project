@@ -1,0 +1,49 @@
+@import "@styles/variables.scss";
+@import "@styles/mixins.scss";
+
+
+.cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    & .title {
+        margin-top: 50px;
+        width: 20vw;
+        height: 6vw;
+        @include fontInfo(700);
+        font-size: 4vw;
+        line-height: 6vw;
+        text-align: center;
+        color: $secondary-color;
+        margin-bottom: 2vw;
+    }
+
+    .products-list {
+        display: flex;
+        gap: 29px;
+        margin-left: 60px;
+        flex-wrap: wrap;
+    }
+
+    & .empty-cart {
+        @include fontInfo(700);
+        width: 20vw;
+        height: 6vw;
+        font-size: 4vw;
+        line-height: 6vw;
+        text-align: center;
+        color: $secondary-color;
+        margin-bottom: 2vw;
+    }
+    
+}
+
+@media (max-width: 800px) {
+    .products-list {
+        display: flex;
+        gap: 10px;
+        margin-left: 10px;
+        flex-wrap: wrap;
+    }
+}

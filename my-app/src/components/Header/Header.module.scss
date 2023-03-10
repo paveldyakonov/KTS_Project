@@ -1,24 +1,20 @@
-@import "@styles/style";
+@import "@styles/variables.scss";
+@import "@styles/mixins.scss";
 
 .header {
     display: flex;
-    // justify-content: space-evenly;
     align-items: center;
     border-bottom: 2px solid #F3F3F3;
     height: 120px;
-    width: 100vw;
+    width: 98vw;
     box-sizing: border-box;
+    overflow: hidden;
 
-    & div {
-        font-family: Arial, Helvetica, sans-serif;
-        font-style: normal;
-        font-weight: 700;
+    & .logo_and_name {
+        @include fontInfo(700);
         font-size: 18px;
         line-height: 32px;
         color: $secondary-color;
-    }
-
-    & .logo_and_name {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -28,6 +24,10 @@
     }
 
     & .navbar {
+        @include fontInfo(700);
+        font-size: 18px;
+        line-height: 32px;
+        color: $secondary-color;
         display: flex;
         align-items: flex-start;
         padding: 0px;
@@ -36,19 +36,15 @@
         width: 26vw;
         margin: 3vw 24vw 44px 0px;
 
-        & div {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+        &__nav {
+            @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
         }
 
         :first-child {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 500;
+            @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
             color: $primary-color;
@@ -56,6 +52,10 @@
     }
 
     & .trash_and_profile {
+        @include fontInfo(700);
+        font-size: 18px;
+        line-height: 32px;
+        color: $secondary-color;
         display: flex;
         justify-content: space-between;
         gap: 10px;
@@ -73,7 +73,6 @@
 @media (max-width: 800px) {
     .header {
         display: flex;
-        // justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
         border-bottom: 2px solid #F3F3F3;
@@ -81,16 +80,11 @@
         width: 100vw;
         box-sizing: border-box;
 
-        & div {
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: normal;
-            font-weight: 700;
+        & .logo_and_name {
+            @include fontInfo(700);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
-        }
-
-        & .logo_and_name {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -100,6 +94,10 @@
         }
 
         & .navbar {
+            @include fontInfo(700);
+            font-size: 18px;
+            line-height: 32px;
+            color: $secondary-color;
             display: flex;
             align-items: flex-start;
             justify-content: center;
@@ -109,19 +107,15 @@
             width: 26vw;
             margin: 3vw 0px 44px 0px;
 
-            & div {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 500;
+            &__nav {
+                @include fontInfo(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $secondary-color;
             }
 
             :first-child {
-                font-family: Arial, Helvetica, sans-serif;
-                font-style: normal;
-                font-weight: 500;
+                @include fontInfo(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $primary-color;
@@ -129,6 +123,10 @@
         }
 
         & .trash_and_profile {
+            @include fontInfo(700);
+            font-size: 18px;
+            line-height: 32px;
+            color: $secondary-color;
             display: flex;
             justify-content: space-between;
             gap: 10px;

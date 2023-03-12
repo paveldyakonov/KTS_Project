@@ -46,7 +46,7 @@ const SearchInput: React.FC = () => {
             let search: string | null = "";
             if (searchParams.has("search")) {
               search = searchParams.get("search");
-              if (search)
+              if (search || search === "")
                 setSearchParams({
                   search: search,
                   categoryId: `${res.id}${res.name}`,

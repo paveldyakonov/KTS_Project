@@ -9,17 +9,23 @@ import { Meta } from "@utils/meta";
 import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import styles from "./ProductsList.module.scss";
 
 const ProductsList: React.FC = () => {
   const navigate = useNavigate();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const productsListStore = useLocalStore(() => new ProductsListStore());
 
   useEffect(() => {
-    productsListStore.getProductsList("reset");
+    if (searchParams.has("offset")) {
+      productsListStore.getProductsListWithOffset();
+    } else {
+      productsListStore.getProductsList("reset");
+    }
   }, [productsListStore]);
 
   const clickEventHandler = useCallback(
@@ -48,7 +54,14 @@ const ProductsList: React.FC = () => {
         {productsListStore.meta !== Meta.error && (
           <InfiniteScroll
             dataLength={productsListStore.cardsList.length}
-            next={productsListStore.getProductsListMore}
+            next={() => {
+              if (productsListStore.offset > 0) {
+                searchParams.set("offset", productsListStore.offset.toString());
+                setSearchParams(searchParams);
+              }
+              
+              productsListStore.getProductsListMore();
+            }}
             hasMore={productsListStore.hasMore}
             loader={<div className={styles.loader}>Loading...</div>}
             endMessage={<p>That's all products</p>}

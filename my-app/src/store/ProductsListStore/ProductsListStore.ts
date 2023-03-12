@@ -56,6 +56,7 @@ export default class ProductsListStore implements ILocalStore {
       getProductsList: action.bound,
       getProductsListInit: action.bound,
       getProductsListMore: action.bound,
+      getProductsListWithOffset: action.bound,
     });
   }
 
@@ -65,6 +66,10 @@ export default class ProductsListStore implements ILocalStore {
 
   get meta(): Meta {
     return this._meta;
+  }
+
+  get offset(): number {
+    return this._offset;
   }
 
   setHasMore(): void {
@@ -105,6 +110,7 @@ export default class ProductsListStore implements ILocalStore {
         this.setHasMore();
         return;
       }
+      this.hasMore = true;
 
       try {
         const list = JSON.parse(JSON.stringify(this._cardsList));
@@ -122,6 +128,23 @@ export default class ProductsListStore implements ILocalStore {
         this._meta = Meta.error;
       }
     });
+  }
+
+  getProductsListWithOffset(): void {
+    const curOffset: undefined | string = rootStore.query.getParam("offset")
+    ? rootStore.query.getParam("offset")?.toString()
+    : "0";
+
+    let numCurOffset: number = 0;
+    
+    if (curOffset) {
+      numCurOffset = parseInt(curOffset);
+      this.getProductsListInit();
+      while (this._offset < numCurOffset) {
+        this.getProductsList();
+        this._offset += 12;
+      }
+    }
   }
 
   getProductsListInit(): void {

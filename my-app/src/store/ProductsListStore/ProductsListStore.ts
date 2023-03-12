@@ -52,7 +52,6 @@ export default class ProductsListStore implements ILocalStore {
       hasMore: observable,
       cardsList: computed,
       meta: computed,
-      offset: computed,
       setHasMore: action.bound,
       getProductsList: action.bound,
       getProductsListInit: action.bound,

@@ -26,6 +26,7 @@ const ProductsList: React.FC = () => {
     } else {
       productsListStore.getProductsList("reset");
     }
+    
   }, [productsListStore]);
 
   const clickEventHandler = useCallback(

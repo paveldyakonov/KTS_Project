@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "homepage": "https://paveldyakonov.github.io/KTS_Project",
   "scripts": {
     "dev": "cross-env NODE_ENV=development npx webpack serve --mode=development",
     "build": "cross-env NODE_ENV=production npx webpack --mode=production",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist",
     "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json"
   },
   "dependencies": {
@@ -42,6 +45,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.3",
     "postcss-loader": "^7.0.2",

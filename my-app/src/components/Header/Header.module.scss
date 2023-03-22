@@ -30,24 +30,27 @@
         color: $secondary-color;
         display: flex;
         align-items: flex-start;
+        justify-content: center;
         padding: 0px;
         gap: 4vw;
         height: 32px;
         width: 26vw;
-        margin: 3vw 24vw 20px 0px;
+        margin: 3vw 24vw 3vw 0px;
 
         &__nav {
             @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
             color: $secondary-color;
+            text-decoration: none;
         }
 
-        :first-child {
+        & .selected {
             @include fontInfo(500);
             font-size: 18px;
             line-height: 32px;
             color: $primary-color;
+            text-decoration: none;
         }
     }
 
@@ -62,6 +65,27 @@
 
         & .trash {
             margin: 3vw 2vw 3vw 0px;
+            display: flex;
+            gap: 0;
+            position: relative;
+
+            & .cart-length {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                top: 15px;
+                left: 10px;
+                background-color: transparent;
+                background: #F9F9F9;
+                border-radius: 20px;
+                @include fontInfo(700);
+                font-size: 16px;
+                line-height: 15px;
+                color: $primary-color;
+            }
         }
 
         & .profile {
@@ -115,11 +139,12 @@
                 color: $secondary-color;
             }
 
-            :first-child {
+            & .selected {
                 @include fontInfo(500);
                 font-size: 18px;
                 line-height: 32px;
                 color: $primary-color;
+                text-decoration: none;
             }
         }
 
@@ -141,4 +166,12 @@
             }
         }
     }
+}
+
+.cart-selected div:first-child {
+    width: 40px;
+    height: 40px;
+    box-shadow: $box-shadow;
+    border-radius: 50%;
+    border-color: $primary-color;
 }

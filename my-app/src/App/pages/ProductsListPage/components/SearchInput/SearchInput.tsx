@@ -10,16 +10,18 @@ import { useSearchParams } from "react-router-dom";
 
 import styles from "./SearchInput.module.scss";
 import Filter from "../Filter";
+import FilterStore from "@store/FilterStore";
 
-const SearchInput: React.FC = () => {
+const SearchInput: React.FC = (): any => {
   const inputStore = useLocalStore(() => new InputStore());
+  const filterStore = useLocalStore(() => new FilterStore());
   const [searchParams, setSearchParams] = useSearchParams();
 
   const onHandleChange = useCallback(() => {
     let category: string | null = "";
     if (searchParams.has("categoryId")) {
       category = searchParams.get("categoryId");
-      if (category)
+      if (category !== null)
         setSearchParams({ search: inputStore.text, categoryId: category });
     } else {
       setSearchParams({ search: inputStore.text });
@@ -35,26 +37,37 @@ const SearchInput: React.FC = () => {
           value={inputStore.text}
           type="text"
           placeholder="Search property"
-          onChange={(e) => inputStore.setText(e.target.value)}
+          onChange={useCallback((e: any) => inputStore.setText(e.target.value), [inputStore])}
         ></input>
         <Button onClick={onHandleChange}>Find Now</Button>
       </div>
       <div>
         <Filter
-          value={inputStore.categoryId.slice(1)}
-          onChange={(res: CategoryItemModel) => {
-            let search: string | null = "";
+          value={filterStore.categoryId.slice(1)}
+          onChange={useCallback((res: CategoryItemModel) => {
             if (searchParams.has("search")) {
-              search = searchParams.get("search");
-              if (search || search === "")
-                setSearchParams({
-                  search: search,
-                  categoryId: `${res.id}${res.name}`,
-                });
+              const search: string | null = searchParams.get("search");
+              if (search !== null) {
+                if (res.name === "Deselect") {
+                  setSearchParams({
+                    search: search,
+                    categoryId: "",
+                  })
+                } else {
+                  setSearchParams({
+                    search: search,
+                    categoryId: `${res.id}${res.name}`,
+                  })
+                }
+              };
             } else {
-              setSearchParams({ categoryId: `${res.id}${res.name}` });
+              if (res.name === "Deselect") {
+                setSearchParams({ categoryId: "" });
+              } else {
+                setSearchParams({ categoryId: `${res.id}${res.name}` });
+              }
             }
-          }}
+          }, [searchParams, filterStore])}
         />
       </div>
     </div>

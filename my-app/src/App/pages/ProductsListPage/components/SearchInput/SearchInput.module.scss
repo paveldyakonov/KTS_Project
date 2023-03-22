@@ -4,7 +4,7 @@
 .search-input {
     width: 86vw;
     height: 84px;
-    margin: 5.5vw 4vw 3.5vw 6vw;
+    margin: 0vw 4vw 3.5vw 6vw;
     box-sizing: border-box;
     display: flex;
 
@@ -14,12 +14,14 @@
         box-sizing: border-box;
         position: relative;
         background-color: $white-color;
-        box-shadow: $box-shadow;
+        box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
 
         & img {
+            width: 25px;
+            height: 25px;
             position: absolute;
-            top: 2vw;
-            bottom: 2vw;
+            top: 50%;
+            transform: translateY(-50%);
             left: 2vw;
         }
 
@@ -68,7 +70,7 @@
         width: 190px;
         height: 84px;
         background-color: $white-color;
-        box-shadow: $box-shadow;
+        box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
         border: none;
         @include fontInfo(500);
         font-size: 18px;
@@ -81,10 +83,10 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
     .search-input {
         padding-top: 100px;
-        padding-bottom: 100px;
+        padding-bottom: 70px;
         padding-right: 40px;
         width: 327px;
         height: 55px;
@@ -93,6 +95,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
 
         &__search {
             width: 327px;
@@ -100,14 +104,15 @@
             box-sizing: border-box;
             position: relative;
             background-color: $white-color;
-            box-shadow: $box-shadow;
+            box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
             margin-left: 30px;
+            margin-bottom: 16px;
 
             & img {
                 position: absolute;
-                top: 16px;
-                bottom: 16px;
-                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 16px;
                 @include square(19px);
             }
 
@@ -163,7 +168,6 @@
 
         &__button-filter {
             box-sizing: border-box;
-            margin-top: 16px;
             margin-left: 30px;
             display: flex;
             justify-content: center;
@@ -171,7 +175,7 @@
             width: 327px;
             height: 48px;
             background-color: $white-color;
-            box-shadow: $box-shadow;
+            box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
             border: none;
             @include fontInfo(500);
             font-size: 14px;

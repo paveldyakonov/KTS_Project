@@ -23,7 +23,7 @@ import {
   runInAction,
 } from "mobx";
 
-type PrivateFields = "_cardsList" | "_cardTitle" | "_categoryId" | "_meta";
+type PrivateFields = "_cardsList" | "_cardTitle" | "_categoryId" | "_meta" | "_offset" | "_limit" | "_hasMore";
 
 export default class ProductsListStore implements ILocalStore {
   private _cardsList: CollectionModel<string, ProductItemModel> =
@@ -41,7 +41,11 @@ export default class ProductsListStore implements ILocalStore {
 
   private _offset: number = 0;
   private _meta: Meta = Meta.initial;
-  hasMore: boolean = true;
+  private _limit: number | string | undefined = rootStore.query.getParam("offset") 
+    ? rootStore.query.getParam("offset")?.toString()
+    : 12;
+
+  private _hasMore: boolean = true;
 
   constructor() {
     makeObservable<ProductsListStore, PrivateFields>(this, {
@@ -49,15 +53,23 @@ export default class ProductsListStore implements ILocalStore {
       _cardTitle: observable,
       _categoryId: observable,
       _meta: observable,
-      hasMore: observable,
+      _hasMore: observable,
+      _offset: observable,
+      _limit: observable,
+      hasMore: computed,
       cardsList: computed,
       meta: computed,
+      offset: computed,
       setHasMore: action.bound,
       getProductsList: action.bound,
       getProductsListInit: action.bound,
       getProductsListMore: action.bound,
       getProductsListWithOffset: action.bound,
     });
+  }
+
+  get hasMore(): boolean {
+    return this._hasMore;
   }
 
   get cardsList(): ProductItemModel[] {
@@ -73,7 +85,7 @@ export default class ProductsListStore implements ILocalStore {
   }
 
   setHasMore(): void {
-    this.hasMore = false;
+    this._hasMore = false;
   }
 
   async getProductsList(mode: string = ""): Promise<void> {
@@ -100,17 +112,18 @@ export default class ProductsListStore implements ILocalStore {
         title: this._cardTitle,
         categoryId: newCategoryId,
         offset: this._offset,
-        limit: 12,
+        limit: this._limit,
       },
     });
 
     runInAction(() => {
+      this._limit = 12;
       this._meta = Meta.success;
       if (result.data.length === 0) {
         this.setHasMore();
         return;
       }
-      this.hasMore = true;
+      this._hasMore = true;
 
       try {
         const list = JSON.parse(JSON.stringify(this._cardsList));
@@ -136,31 +149,31 @@ export default class ProductsListStore implements ILocalStore {
     : "0";
 
     let numCurOffset: number = 0;
-    
+
     if (curOffset) {
       numCurOffset = parseInt(curOffset);
-      this.getProductsListInit();
-      while (this._offset < numCurOffset) {
-        this.getProductsList();
-        this._offset += 12;
-      }
+      if (numCurOffset !== 0) this._limit = numCurOffset;
+      
+      this.getProductsList("reset");
+      this._offset = numCurOffset - 12;
     }
   }
 
   getProductsListInit(): void {
     this._offset = 0;
     this._cardsList = getInitialCollectionModel();
-    this.hasMore = true;
+    this._hasMore = true;
   }
 
   getProductsListMore(): void {
     this._offset += 12;
+    this._limit = 12;
     this.getProductsList();
   }
 
   destroy(): void {
-    // this._qqReaction();
-    // this._qqReactionCategoryId();
+    this._qqReaction();
+    this._qqReactionCategoryId();
   }
 
   private readonly _qqReaction: IReactionDisposer = reaction(
@@ -168,7 +181,9 @@ export default class ProductsListStore implements ILocalStore {
     (search) => {
       search = search?.toString();
       this._cardTitle = search ? search : "";
-      this.getProductsList("reset");
+
+      if (rootStore.query.getParam("offset")) this.getProductsListWithOffset();
+      else this.getProductsList("reset");
     }
   );
 
@@ -177,7 +192,9 @@ export default class ProductsListStore implements ILocalStore {
     (search) => {
       search = search?.toString();
       this._categoryId = search ? search : "";
-      this.getProductsList("reset");
+      
+      if (rootStore.query.getParam("offset")) this.getProductsListWithOffset();
+      else this.getProductsList("reset");
     }
   );
 }

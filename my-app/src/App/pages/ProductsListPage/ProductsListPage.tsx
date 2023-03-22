@@ -4,7 +4,7 @@ import ProductsList from "./components/ProductsList";
 import SearchInput from "./components/SearchInput";
 import styles from "./ProductsListPage.module.scss";
 
-const ProductsListPage: React.FC = () => {
+const ProductsListPage: React.FC = (): any => {
   return (
     <div>
       <div className={styles["info-about-page"]}>

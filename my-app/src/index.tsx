@@ -12,11 +12,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <Router.BrowserRouter>
+    <Router.HashRouter>
       <App />
-    </Router.BrowserRouter>
-  </React.StrictMode>
+    </Router.HashRouter>
 );
 
 if (module.hot) {

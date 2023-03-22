@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./CartPage.module.scss";
 
-export const CartPage: React.FC = () => {
+export const CartPage: React.FC = (): any => {
   const navigate = useNavigate();
 
   const cartStore = useLocalStore(() => new CartStore());

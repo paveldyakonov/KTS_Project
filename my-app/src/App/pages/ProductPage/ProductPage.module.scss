@@ -5,17 +5,12 @@
     display: flex;
     justify-content: center;
     width: 86vw;
-    height: 500px;
-    margin: 80px 0 80px 80px;
-    padding: 50px 0;
-
-    & img {
-        @include square(500px);
-    }
+    height: 41vw;
+    margin: 100px 0 50px 100px;
 
     &__info-about-card {
         margin-top: 32px;
-        margin-left: 30px;
+        margin-left: 50px;
         display: flex;
         flex-direction: column;
 
@@ -32,18 +27,19 @@
             @include fontInfo(500);
             font-size: 18px;
             line-height: 180%;
+            width: 41vw;
             color: $grey-color;
             text-align: left;
-            margin-bottom: 128px;
+            margin-bottom: 9vw;
         }
 
         & .info-about-card__price {
             @include fontInfo(700);
-            font-size: 44px;
+            font-size: 3vw;
             line-height: 130%;
             color: $secondary-color;
             text-align: left;
-            margin-bottom: 50px;
+            margin-bottom: 3.5vw;
         }
     }
 }
@@ -53,7 +49,7 @@
     gap: 20px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .card {
         display: flex;
         justify-content: center;
@@ -61,26 +57,24 @@
         flex-direction: column;
         width: 90vw;
         height: 600px;
-        margin: 30px 20px;
+        margin: 50px 20px;
         margin-right: 10px;
-
-        & img {
-            @include square(327px);
-        }
+        padding: 50px 0;
 
         &__info-about-card {
-            margin-top: 12px;
-            margin-left: 20px;
+            margin-top: 30px;
+            margin-left: 0;
             display: flex;
             flex-direction: column;
 
             & .info-about-card__title {
                 @include fontInfo(700);
                 font-size: 24px;
+                width: 326px;
                 line-height: 31px;
                 color: $secondary-color;
                 text-align: left;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
             }
 
             & .info-about-card__subtitle {
@@ -88,8 +82,9 @@
                 font-size: 14px;
                 line-height: 25px;
                 color: $grey-color;
+                width: 326px;
                 text-align: left;
-                margin-bottom: 60px;
+                margin-bottom: 30px;
             }
 
             & .info-about-card__price {
@@ -98,7 +93,7 @@
                 line-height: 31px;
                 color: $secondary-color;
                 text-align: left;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
             }
         }
     }
@@ -109,5 +104,50 @@
         justify-content: center;
         align-items: center;
         gap: 15px;
+    }
+}
+
+@media (min-width: 3000px) {
+    .card {
+        display: flex;
+        justify-content: center;
+        width: 86vw;
+        height: 1000px;
+        margin: 100px 0 50px 100px;
+    
+        &__info-about-card {
+            margin-top: 32px;
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+    
+            & .info-about-card__title {
+                @include fontInfo(700);
+                font-size: 90px;
+                line-height: 130%;
+                color: $secondary-color;
+                text-align: left;
+                margin-bottom: 20px;
+            }
+    
+            & .info-about-card__subtitle {
+                @include fontInfo(500);
+                font-size: 18px;
+                line-height: 180%;
+                width: 1000px;
+                color: $grey-color;
+                text-align: left;
+                margin-bottom: 270px;
+            }
+    
+            & .info-about-card__price {
+                @include fontInfo(700);
+                font-size: 90px;
+                line-height: 130%;
+                color: $secondary-color;
+                text-align: left;
+                margin-bottom: 100px;
+            }
+        }
     }
 }

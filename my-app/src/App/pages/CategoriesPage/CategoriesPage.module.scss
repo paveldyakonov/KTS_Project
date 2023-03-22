@@ -1,0 +1,38 @@
+@import "@styles/variables.scss";
+@import "@styles/mixins.scss";
+
+.categories-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .title {
+        @include fontInfo(700);
+        width: 20vw;
+        height: 12vw;
+        font-size: 4vw;
+        line-height: 6vw;
+        text-align: center;
+        color: $secondary-color;
+        margin-bottom: 2vw;
+    }
+
+    & .categories-list {
+        display: flex;
+        justify-content: center;
+        gap: 29px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 500px) {
+    .categories-page {
+        & .categories-list {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    }
+}

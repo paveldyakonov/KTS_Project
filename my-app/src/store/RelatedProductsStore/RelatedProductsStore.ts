@@ -57,7 +57,7 @@ export default class RelatedProductsStore implements ILocalStore {
       url: `${API_ENDPOINT.CATEGORY_ALL_PRODUCTS}/${categoryId}/products`,
       params: {
         offset: this._offset,
-        limit: 6,
+        limit: 3,
       },
     });
 

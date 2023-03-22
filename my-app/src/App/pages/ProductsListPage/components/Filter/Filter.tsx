@@ -5,6 +5,9 @@ import FilterStore from "@store/FilterStore";
 import { CategoryItemModel } from "@store/models/CategoryList";
 import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
+import { Meta } from "@utils/meta";
+import Loader from "@components/Loader";
+import { LoaderSize } from "@components/Loader/Loader";
 
 export type FilterProps = {
   value: string;
@@ -20,13 +23,23 @@ export const Filter: React.FC<FilterProps> = ({ ...props }): any => {
   }, [filterStore]);
 
   return (
-    <MultiDropdown
-      value={props.value}
-      onChange={props.onChange}
-      categories={filterStore.categoryList}
-      isOpen={filterStore.isOpen}
-      setIsOpen={filterStore.setIsOpen}
-    />
+    <div>
+      {filterStore.meta === Meta.loading && (
+        <div>
+          <Loader size={LoaderSize.s}/>
+        </div>
+      )}
+      {filterStore.meta !== Meta.error && (
+        <MultiDropdown
+          value={props.value}
+          onChange={props.onChange}
+          categories={filterStore.categoryList}
+          isOpen={filterStore.isOpen}
+          setIsOpen={filterStore.setIsOpen}
+        />
+      )}
+      {filterStore.meta === Meta.error && <div>ERROR</div>}
+    </div>
   );
 };
 

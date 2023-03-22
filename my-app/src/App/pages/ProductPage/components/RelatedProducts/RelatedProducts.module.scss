@@ -4,7 +4,7 @@
 .products-list {
     display: flex;
     gap: 29px;
-    margin-left: 60px;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -16,8 +16,8 @@
 }
 
 .title {
-    margin-left: 60px;
-    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-bottom: 30px;
     text-align: left;
     @include fontInfo(700);
     font-size: 26px;
@@ -26,17 +26,16 @@
     color: $secondary-color;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 500px) {
     .products-list {
         display: flex;
         gap: 15px;
-        margin-left: 24px;
-        margin-right: 24px;
+        justify-content: center;
         flex-wrap: wrap;
     }
 
     .title {
-        margin-left: 24px;
+        margin-left: 30px;
         margin-bottom: 10px;
         text-align: left;
         @include fontInfo(700);

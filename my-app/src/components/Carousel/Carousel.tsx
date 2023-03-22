@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import styles from "./Carousel.module.scss";
 
@@ -6,30 +8,18 @@ export type CarouselProps = {
   carouselItems: React.ReactNode[];
 };
 
-const Carousel: React.FC<CarouselProps> = ({ carouselItems, ...props }) => {
-  const [active, setActive] = useState(0);
-  let scrollInterval = useRef<NodeJS.Timeout | any>(null);
-
-  useEffect(() => {
-    scrollInterval.current = setInterval(() => {
-      setActive((active + 1) % carouselItems.length);
-    }, 3000);
-
-    return () => clearInterval(scrollInterval.current);
-  });
-
-  return (
-    <div>
-      {carouselItems.map((item: any, index) => {
-        const activeClass = active === index ? styles.visible : "";
-        return React.cloneElement(item, {
-          ...props,
-          className: `${styles["carousel-item"]}${activeClass}`,
-          key: `carousel-item${item.key}`,
-        });
-      })}
-    </div>
+const CarouselComponent: React.FC<CarouselProps> = ({ carouselItems, ...props }): any => {
+  return(
+    <Carousel
+      showThumbs={false} 
+      className={styles["carousel-item"]} 
+      width={window.innerWidth < 1000 ? "327px" : "41vw"}
+      autoPlay={true}
+      infiniteLoop={true}
+    >
+      {carouselItems.map((item: React.ReactNode) => <div key={item?.toString()}>{item}</div>)}
+    </Carousel>
   );
 };
 
-export default React.memo(Carousel);
+export default CarouselComponent;

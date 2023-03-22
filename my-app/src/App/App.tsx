@@ -8,6 +8,7 @@ import styles from "./App.module.scss";
 import CartPage from "./pages/CartPage";
 import ProductPage from "./pages/ProductPage";
 import ProductsListPage from "./pages/ProductsListPage";
+import CategoriesPage from "./pages/CategoriesPage";
 
 const App = () => {
   useQueryParamsStoreInit();
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/product">
           <Route path=":id" element={<ProductPage />} />
         </Route>
+        <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

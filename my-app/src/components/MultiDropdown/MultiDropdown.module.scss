@@ -11,7 +11,7 @@
     width: 190px;
     height: 84px;
     background-color: $white-color;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
     border: none;
     @include fontInfo(500);
     font-size: 18px;
@@ -36,7 +36,7 @@
     position: absolute;
     background-color: $white-color;
     border: 1px solid $white-color;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
     width: 190px;
 }
 
@@ -84,7 +84,7 @@
         width: 327px;
         height: 48px;
         background-color: $white-color;
-        box-shadow: $box-shadow;
+        box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
         border: none;
         @include fontInfo(500);
         font-size: 14px;
@@ -109,7 +109,7 @@
         position: absolute;
         background-color: $white-color;
         border: 1px solid $white-color;
-        box-shadow: $box-shadow;
+        box-shadow: 0px 4px 20px rgba(175, 173, 181, 0.2);
         width: 327px;
     }
 

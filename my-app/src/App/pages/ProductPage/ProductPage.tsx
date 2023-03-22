@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
 import Button from "@components/Button";
 import { ButtonSize } from "@components/Button/Button";
-import Carousel from "@components/Carousel";
-import Loader, { LoaderSize } from "@components/Loader/Loader";
+import CarouselComponent from "@components/Carousel";
 import CartStore from "@store/CartStore";
 import { ProductItemModel } from "@store/models/ProductsList";
 import ProductPageStore from "@store/ProductPageStore";
@@ -14,8 +13,10 @@ import { useParams } from "react-router-dom";
 
 import RelatedProducts from "./components/RelatedProducts";
 import styles from "./ProductPage.module.scss";
+import OneProductCardSkeleton from "@components/Skeletons/OneProductCardSkeleton";
+import SmallOneProductCardSkeleton from "@components/Skeletons/SmallOneProductCardSkeleton";
 
-const InfoProductCard: React.FC = () => {
+const InfoProductCard: React.FC = (): any => {
   let { id } = useParams();
   const product = useLocalStore(() => new ProductPageStore());
   const cartStore = useLocalStore(() => new CartStore());
@@ -47,16 +48,21 @@ const InfoProductCard: React.FC = () => {
 
   return (
     <div>
-      <div id={product.card.id} className={styles.card}>
-        {product.meta === Meta.loading && (
-          <div className={styles.loader}>
-            <Loader size={LoaderSize.l} />
+      {product.meta === Meta.loading && window.innerWidth > 1000 && (
+          <div className={styles.card}>
+            <OneProductCardSkeleton />
           </div>
+      )}
+      {product.meta === Meta.loading && window.innerWidth <= 1000 && (
+          <div className={styles.card}>
+            <SmallOneProductCardSkeleton />
+          </div>
+      )}
+      <div id={product.card.id} className={styles.card}>
+        {product.meta !== Meta.loading && (
+          <CarouselComponent carouselItems={items.current} />
         )}
-        {product.meta !== Meta.error && (
-          <Carousel carouselItems={items.current} />
-        )}
-        {product.meta !== Meta.error && (
+        {product.meta !== Meta.loading && (
           <div className={styles["card__info-about-card"]}>
             <div className={styles["info-about-card__title"]}>
               {product.card.title}
